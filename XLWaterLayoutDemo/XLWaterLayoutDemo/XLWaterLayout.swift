@@ -22,13 +22,20 @@ class XLWaterLayout: UICollectionViewLayout {
     
     private var allAttributes = [UICollectionViewLayoutAttributes]()
     private var columnsHeights = [CGFloat]()
-
-    convenience init(columnsNum:Int, columnSpace:CGFloat, rowSpace:CGFloat, edgeInsets:UIEdgeInsets) {
+    //设置cell高度
+    var calculateHeightBlock: ((IndexPath)->CGFloat)?
+    
+    convenience init(columnsNum:Int,
+                     columnSpace:CGFloat,
+                     rowSpace:CGFloat,
+                     edgeInsets:UIEdgeInsets,
+                     calculateHeightBlock:((IndexPath)->CGFloat)?) {
         self.init()
         self.defaultColumnsNum = columnsNum >= 1 ? columnsNum : 2
         self.defaultColumnSpace = columnSpace >= 0 ? columnSpace : 10
         self.defaultRowSpace = rowSpace >= 0 ? rowSpace : 10
         self.defaultEdgeinsets = edgeInsets
+        self.calculateHeightBlock = calculateHeightBlock
     }
     
     override func prepare() {
@@ -76,8 +83,15 @@ class XLWaterLayout: UICollectionViewLayout {
         }
         
         let width:CGFloat = self.itemWidth
-        let height:CGFloat = CGFloat(100+arc4random_uniform(200))
         
+        var height:CGFloat = 100
+        
+        if let block = self.calculateHeightBlock {
+            height = block(indexPath)
+        } else {
+            height = CGFloat(100+arc4random_uniform(200))
+        }
+                
         let originalX:CGFloat = self.defaultEdgeinsets.left + CGFloat(shortestColumnIndex)*(width+self.defaultColumnSpace)
         var originalY:CGFloat = shortestHeight
         if originalY != self.defaultEdgeinsets.top {
