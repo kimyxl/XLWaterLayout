@@ -46,7 +46,7 @@ class XLWaterLayout: UICollectionViewLayout {
         
         let itemsCount = self.collectionView?.numberOfItems(inSection: 0) ?? 0
         for i in 0..<itemsCount {
-            let indexpath = IndexPath.init(row: i, section: 0)
+            let indexpath = IndexPath.init(item: i, section: 0)
             let attr = self.layoutAttributesForItem(at: indexpath)
             self.allAttributes.append(attr!)
         }
@@ -102,5 +102,8 @@ class XLWaterLayout: UICollectionViewLayout {
         }
     }
     
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return false
+    }
     
 }
