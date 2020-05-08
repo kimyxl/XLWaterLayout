@@ -50,3 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+func DispatchAfter_main(after:Double, handler:@escaping()->Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now()+after) {
+        handler()
+    }
+}

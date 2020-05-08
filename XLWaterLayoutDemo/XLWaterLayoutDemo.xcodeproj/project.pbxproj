@@ -60,10 +60,10 @@
 		AB60D6DB221BE2E40046C00E /* XLWaterLayoutDemo */ = {
 			isa = PBXGroup;
 			children = (
-				AB60D6EE221BE3490046C00E /* TestCollectionViewCell.swift */,
-				AB60D6EF221BE3490046C00E /* XLWaterLayout.swift */,
 				AB60D6DC221BE2E40046C00E /* AppDelegate.swift */,
 				AB25BEF3246533CD002BE702 /* TestViewController.swift */,
+				AB60D6EF221BE3490046C00E /* XLWaterLayout.swift */,
+				AB60D6EE221BE3490046C00E /* TestCollectionViewCell.swift */,
 				AB60D6DE221BE2E40046C00E /* ViewController.swift */,
 				AB60D6E0221BE2E40046C00E /* Main.storyboard */,
 				AB60D6E3221BE2E50046C00E /* Assets.xcassets */,

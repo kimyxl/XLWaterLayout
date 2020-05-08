@@ -15,6 +15,7 @@ class TestViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //默认为cell高度随机
         //let customLayout = XLWaterLayout.init()
         
         let customLayout = XLWaterLayout.init(columnsNum: 2, columnSpace: 10, rowSpace: 10, edgeInsets: UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)) { (indexPath) -> CGFloat in
@@ -32,6 +33,15 @@ class TestViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         self.view.addSubview(collectionView)
         collectionView.register(TestCollectionViewCell.self, forCellWithReuseIdentifier: cellid)
+        
+        
+        //模拟请求后，刷新高度
+        DispatchAfter_main(after: 6) {
+            customLayout.calculateHeightBlock = { (indexPath) -> CGFloat in
+                return 200
+            }
+            collectionView.reloadData()
+        }
         
     }
 
